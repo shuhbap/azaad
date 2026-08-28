@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Wedding Invitation | Abdul Kalam & Majidha</title>
   
-  <!-- Google Fonts: Arabic + English -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -43,7 +43,6 @@
       background: radial-gradient(ellipse at center, #1a2e1a 0%, #0a1a0a 100%);
     }
 
-    /* Main geometric pattern - rotating */
     .geo-pattern-main {
       position: absolute;
       top: 50%;
@@ -60,7 +59,6 @@
       100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-    /* Secondary pattern - counter rotate */
     .geo-pattern-secondary {
       position: absolute;
       top: 50%;
@@ -77,7 +75,6 @@
       100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-    /* Floating Arabic star particles */
     .star-particle {
       position: absolute;
       width: 6px;
@@ -103,51 +100,39 @@
       100% { transform: translate(20px, -20px) scale(1) rotate(360deg); }
     }
 
-    /* ----- INVITATION CARD (Islamic Style) ----- */
+    /* ----- INVITATION CARD ----- */
     .invitation-card {
       position: relative;
       z-index: 1;
       max-width: 820px;
       width: 100%;
       background: linear-gradient(145deg, #fcf8f0 0%, #f5efe4 100%);
-      border-radius: 40px 40px 40px 40px;
+      border-radius: 40px;
       padding: 32px 24px;
-      box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 215, 100, 0.1);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(201, 168, 76, 0.15);
-      transition: all 0.2s ease;
     }
 
     @media (min-width: 600px) {
       .invitation-card {
         padding: 48px 44px;
-        border-radius: 50px 50px 50px 50px;
+        border-radius: 50px;
       }
     }
 
-    /* ----- ISLAMIC BORDER DECORATION ----- */
-    .islamic-border-top {
-      text-align: center;
-      font-size: 1.4rem;
-      color: #c9a84c;
-      letter-spacing: 8px;
-      margin-bottom: 6px;
-      font-family: 'Amiri', serif;
-      opacity: 0.7;
-    }
-
+    .islamic-border-top,
     .islamic-border-bottom {
       text-align: center;
       font-size: 1.4rem;
       color: #c9a84c;
       letter-spacing: 8px;
-      margin-top: 16px;
       font-family: 'Amiri', serif;
       opacity: 0.7;
     }
 
-    /* ----- DIVIDERS ----- */
+    .islamic-border-top { margin-bottom: 6px; }
+    .islamic-border-bottom { margin-top: 16px; }
+
     .divider-gold {
       width: 100px;
       height: 2px;
@@ -165,7 +150,15 @@
       opacity: 0.6;
     }
 
-    /* ----- TYPOGRAPHY ----- */
+    .bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      color: #2d4a2d;
+      margin: 6px 0 2px;
+      font-weight: 700;
+    }
+
     .arabic-title {
       font-family: 'Amiri', serif;
       font-size: 2.2rem;
@@ -184,15 +177,6 @@
       font-weight: 700;
       letter-spacing: 1px;
       margin-top: 4px;
-    }
-
-    .bismillah {
-      font-family: 'Amiri', serif;
-      font-size: 1.8rem;
-      text-align: center;
-      color: #2d4a2d;
-      margin: 6px 0 2px;
-      font-weight: 700;
     }
 
     .subhead-arabic {
@@ -232,7 +216,7 @@
       line-height: 1.3;
     }
 
-    /* ----- INFO GRID (Islamic Style) ----- */
+    /* ----- INFO GRID ----- */
     .info-grid-islamic {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -251,11 +235,6 @@
       border-radius: 16px;
       padding: 14px 16px;
       border: 1px solid rgba(201, 168, 76, 0.12);
-      transition: 0.2s ease;
-    }
-
-    .info-card-islamic:hover {
-      background: rgba(201, 168, 76, 0.1);
     }
 
     .info-label-islamic {
@@ -277,14 +256,13 @@
       color: #1a2e1a;
     }
 
-    /* ----- VENUE (Islamic Style) ----- */
+    /* ----- VENUE ----- */
     .venue-islamic {
       background: linear-gradient(135deg, rgba(201, 168, 76, 0.06), rgba(26, 46, 26, 0.04));
       border-radius: 20px;
       padding: 18px 20px;
       margin: 16px 0 20px;
       border-left: 4px solid #c9a84c;
-      border-right: 1px solid rgba(201, 168, 76, 0.1);
     }
 
     .venue-name-islamic {
@@ -306,7 +284,6 @@
       align-items: center;
       gap: 8px;
       background: #1a2e1a;
-      border: none;
       padding: 10px 24px;
       border-radius: 60px;
       font-weight: 500;
@@ -320,8 +297,7 @@
 
     .map-button-islamic:hover {
       background: #2d4a2d;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(201, 168, 76, 0.2);
+      transform: translateY(-2px);
     }
 
     /* ----- POSTER ----- */
@@ -349,7 +325,6 @@
       align-items: center;
       justify-content: center;
       border: 2px solid rgba(201, 168, 76, 0.12);
-      position: relative;
     }
     .reel-islamic video {
       width: 100%;
@@ -365,7 +340,7 @@
       text-align: center;
     }
 
-    /* ----- COUNTDOWN (Islamic Style) ----- */
+    /* ----- COUNTDOWN ----- */
     .countdown-islamic {
       background: rgba(26, 46, 26, 0.04);
       border-radius: 24px;
@@ -414,7 +389,7 @@
       font-weight: 600;
     }
 
-    /* ----- RSVP (Islamic Style) ----- */
+    /* ----- RSVP ----- */
     .rsvp-islamic {
       margin: 20px 0 16px;
       background: rgba(26, 46, 26, 0.03);
@@ -497,7 +472,6 @@
       transition: all 0.2s ease;
       margin-top: 6px;
       font-family: 'Inter', sans-serif;
-      letter-spacing: 0.5px;
     }
 
     .rsvp-submit-islamic:hover {
@@ -505,7 +479,7 @@
       box-shadow: 0 8px 24px rgba(201, 168, 76, 0.25);
     }
 
-    /* ----- SHARE BUTTONS (Islamic) ----- */
+    /* ----- SHARE ----- */
     .share-islamic {
       display: flex;
       flex-wrap: wrap;
@@ -525,7 +499,6 @@
       font-weight: 500;
       color: #1a2e1a;
       font-size: 0.9rem;
-      transition: all 0.15s ease;
       border: 1px solid rgba(201, 168, 76, 0.1);
     }
 
@@ -543,7 +516,6 @@
       background: #1da851;
     }
 
-    /* ----- FOOTER ----- */
     .footer-islamic {
       text-align: center;
       font-size: 0.75rem;
@@ -551,16 +523,9 @@
       margin-top: 24px;
       border-top: 1px solid rgba(201, 168, 76, 0.1);
       padding-top: 20px;
-      letter-spacing: 0.3px;
       font-family: 'Amiri', serif;
     }
 
-    .footer-islamic .arabic {
-      font-size: 1rem;
-      color: #1a2e1a;
-    }
-
-    /* ----- RESPONSIVE ----- */
     @media (max-width: 480px) {
       .arabic-title { font-size: 1.6rem; }
       .english-title { font-size: 1.4rem; }
@@ -569,22 +534,17 @@
       .invitation-card { padding: 20px 14px; border-radius: 28px; }
       .countdown-number-islamic { font-size: 1.5rem; }
       .form-row-islamic { flex-direction: column; }
-      .geo-pattern-main { width: 180vmax; height: 180vmax; }
-      .geo-pattern-secondary { width: 140vmax; height: 140vmax; }
     }
 
     @media (min-width: 768px) {
-      .invitation-card {
-        padding: 56px 50px;
-      }
+      .invitation-card { padding: 56px 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== ISLAMIC BACKGROUND ===== -->
+  <!-- ===== BACKGROUND ===== -->
   <div class="islamic-bg">
-    <!-- Main geometric pattern -->
     <svg class="geo-pattern-main" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <g id="islamic-star">
@@ -593,7 +553,6 @@
           <polygon points="100,195 82,118 100,140 118,118" fill="#c9a84c" opacity="0.8"/>
           <polygon points="5,100 82,82 60,100 82,118" fill="#c9a84c" opacity="0.5"/>
           <polygon points="100,30 130,100 100,170 70,100" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity="0.3"/>
-          <!-- inner octagon -->
           <polygon points="50,50 85,65 100,100 85,135 50,150 15,135 0,100 15,65" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.2"/>
         </g>
       </defs>
@@ -607,8 +566,6 @@
       <use href="#islamic-star" x="200" y="100" />
       <use href="#islamic-star" x="100" y="100" />
     </svg>
-
-    <!-- Secondary pattern -->
     <svg class="geo-pattern-secondary" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <g id="islamic-diamond">
@@ -626,8 +583,6 @@
       <use href="#islamic-diamond" x="100" y="50" />
       <use href="#islamic-diamond" x="50" y="50" />
     </svg>
-
-    <!-- Floating stars -->
     <div class="star-particle"></div>
     <div class="star-particle"></div>
     <div class="star-particle"></div>
@@ -640,38 +595,27 @@
   <!-- ===== INVITATION CARD ===== -->
   <div class="invitation-card">
 
-    <!-- Top Islamic border -->
     <div class="islamic-border-top">✦ ✦ ✦ ✦ ✦</div>
-
-    <!-- Bismillah -->
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-
     <div class="divider-gold"></div>
 
-    <!-- Title -->
     <div class="arabic-title">دَعْوَةُ عُرْس</div>
     <div class="english-title">Wedding Invitation</div>
-
     <div class="subhead-arabic">بِرَحْمَةِ ٱللَّٰهِ نَدْعُوكُمْ لِلْحُضُورِ</div>
     <div class="subhead-english">By the grace of Allah, we invite you to celebrate</div>
-
     <div class="divider-gold-thick"></div>
 
-    <!-- Couple Names -->
     <div class="couple-names-arabic">
       عَبْدُ ٱلْكَلَامِ آزَادْ بَاقَاوِي<br />
-      <span style="font-size:1.6rem; color:#c9a84c;">&</span><br />
+      <span style="font-size:1.6rem; color:#c9a84c;">&amp;</span><br />
       مَاجِدَةُ ٱلنَّسْرِينِ هِدَايَة
     </div>
-
     <div class="divider-gold" style="width:60px;"></div>
-
     <div class="couple-names-english">
       Abdul Kalam Azad Baqavi<br />
       <span style="font-size:1.2rem; color:#c9a84c;">&amp;</span><br />
       Majidha Nasrin Hidaya
     </div>
-
     <div class="divider-gold-thick"></div>
 
     <!-- Info Grid -->
@@ -694,7 +638,7 @@
       </div>
     </div>
 
-    <!-- Date & Time -->
+    <!-- Date -->
     <div style="background:rgba(201,168,76,0.06); border-radius:16px; padding:14px 16px; margin:6px 0 10px; border:1px solid rgba(201,168,76,0.08);">
       <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 12px; font-size:0.95rem;">
         <div><span style="font-weight:600; color:#1a2e1a;">📅 Date:</span> Saturday, September 5, 2026</div>
@@ -709,7 +653,7 @@
       <div class="venue-address-islamic">QX65+XVV, Purangu, Guruvayur - Althara - Ponnani Rd, Kerala 679584, India</div>
       <div style="font-size:0.9rem; color:#5f5342; margin-bottom:6px;">📞 +91 99467 88033</div>
       <a href="https://maps.app.goo.gl/tnPpUdz6ByG9YaVH9?g_st=aw" target="_blank" rel="noopener" class="map-button-islamic">
-        <span>🗺️</span> Get Directions
+        🗺️ Get Directions
       </a>
     </div>
 
@@ -724,7 +668,7 @@
         <source src="https://d.uguu.se/mENlJZZz.mp4" type="video/mp4" />
         <div class="reel-fallback">
           <p>🎬 عُرْسُنَا</p>
-          <p style="font-size:0.8rem; margin-top:6px;">Video unavailable. Please check the link.</p>
+          <p style="font-size:0.8rem; margin-top:6px;">Video unavailable. Please upload a new video.</p>
         </div>
       </video>
     </div>
@@ -786,4 +730,32 @@
           </div>
           <div class="form-group-islamic">
             <label for="guests">Number of Guests *</label>
-            <input type="number" id="guests" name="entry.1065046570" min
+            <input type="number" id="guests" name="entry.1065046570" min="1" value="1" required />
+          </div>
+        </div>
+
+        <div class="form-group-islamic">
+          <label for="meal">Meal Preference *</label>
+          <select id="meal" name="entry.1968881400" required>
+            <option value="">-- Select --</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Non-Vegetarian">Non-Vegetarian</option>
+          </select>
+        </div>
+
+        <div class="form-group-islamic">
+          <label for="message">Any special requests?</label>
+          <input type="text" id="message" name="entry.2131431479" placeholder="Dietary needs, etc." />
+        </div>
+
+        <button type="submit" class="rsvp-submit-islamic">✨ Submit RSVP</button>
+        <p style="font-size:0.7rem; color:#9b8a78; text-align:center; margin-top:4px;">
+          You'll be redirected to Google Forms to complete your response.
+        </p>
+      </form>
+    </div>
+
+    <!r-- Share -->
+    <div class="share-islamic">
+      <a href="https://wa.me/?text=You're invited to the wedding of Abdul Kalam & Majidha!%0A📅 Sept 5, 2026, 5-9 PM%0A📍 Blossom Palace, Purangu%0A🗺️ https://maps.app.goo.gl/tnPpUdz6ByG9YaVH9?g_st=aw" target="_blank" rel="noopener" class="share-btn-islamic whatsapp">
+        📱 Share on WhatsApp
