@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Wedding Invitation | Abdul Kalam & Majidha</title>
-  <!-- Google Fonts for elegant look -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet" />
   <style>
+    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
@@ -16,24 +16,102 @@
     }
 
     body {
-      background: #faf6f0;
       font-family: 'Inter', sans-serif;
       color: #2d2a24;
-      padding: 24px 16px 60px;
+      min-height: 100vh;
+      background: #faf6f0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 24px 16px 60px;
+      position: relative;
+      overflow-x: hidden;
     }
 
+    /* ----- GEOMETRIC BACKGROUND (ISLAMIC PATTERN) ----- */
+    .geo-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #faf6f0 0%, #ede6db 100%);
+    }
+
+    /* SVG pattern layer - rotates slowly */
+    .geo-pattern {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120vmax;
+      height: 120vmax;
+      transform: translate(-50%, -50%);
+      animation: rotatePattern 60s linear infinite;
+      opacity: 0.12;
+    }
+
+    @keyframes rotatePattern {
+      0%   { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* secondary smaller pattern - counter-rotate for depth */
+    .geo-pattern-2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80vmax;
+      height: 80vmax;
+      transform: translate(-50%, -50%);
+      animation: rotatePattern2 80s linear infinite reverse;
+      opacity: 0.08;
+    }
+
+    @keyframes rotatePattern2 {
+      0%   { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* floating geometric particles (tiny stars) */
+    .geo-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #b8a187;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      opacity: 0.08;
+      animation: floatParticle 15s ease-in-out infinite alternate;
+    }
+
+    .geo-particle:nth-child(1) { top: 10%; left: 5%; animation-duration: 18s; }
+    .geo-particle:nth-child(2) { top: 80%; left: 90%; animation-duration: 22s; width: 12px; height: 12px; }
+    .geo-particle:nth-child(3) { top: 60%; left: 8%; animation-duration: 20s; }
+    .geo-particle:nth-child(4) { top: 20%; left: 88%; animation-duration: 16s; width: 10px; height: 10px; }
+    .geo-particle:nth-child(5) { top: 45%; left: 50%; animation-duration: 25s; width: 14px; height: 14px; opacity: 0.05; }
+
+    @keyframes floatParticle {
+      0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33%  { transform: translate(30px, -40px) scale(1.2) rotate(120deg); }
+      66%  { transform: translate(-20px, 30px) scale(0.8) rotate(240deg); }
+      100% { transform: translate(10px, -10px) scale(1) rotate(360deg); }
+    }
+
+    /* ----- INVITATION CARD (on top of bg) ----- */
     .invitation-card {
+      position: relative;
+      z-index: 1;
       max-width: 720px;
       width: 100%;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(2px);
       border-radius: 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.03);
       padding: 32px 24px;
-      position: relative;
       transition: all 0.2s ease;
+      border: 1px solid rgba(200, 180, 160, 0.15);
     }
 
     @media (min-width: 600px) {
@@ -42,7 +120,7 @@
       }
     }
 
-    /* decorative divider */
+    /* decorative */
     .divider {
       width: 80px;
       height: 2px;
@@ -50,7 +128,6 @@
       margin: 20px auto;
       opacity: 0.6;
     }
-
     .divider-thick {
       width: 120px;
       height: 3px;
@@ -65,7 +142,6 @@
       font-weight: 700;
       letter-spacing: -0.02em;
     }
-
     h1 {
       font-size: 2.2rem;
       line-height: 1.2;
@@ -73,7 +149,6 @@
       text-align: center;
       margin-top: 8px;
     }
-
     .subhead {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -83,7 +158,6 @@
       text-align: center;
       margin-top: 6px;
     }
-
     .bismillah {
       font-size: 1.2rem;
       letter-spacing: 1px;
@@ -92,12 +166,10 @@
       font-weight: 300;
       margin: 12px 0 4px;
     }
-
     .couple-names {
       text-align: center;
       margin: 12px 0 8px;
     }
-
     .couple-names h2 {
       font-size: 1.9rem;
       color: #2d241b;
@@ -105,31 +177,23 @@
       line-height: 1.3;
     }
 
-    .couple-names .arabic-decoration {
-      font-size: 1rem;
-      color: #a58d74;
-      letter-spacing: 2px;
-    }
-
+    /* info grid */
     .info-grid {
       display: flex;
       flex-direction: column;
       gap: 18px;
       margin: 28px 0 24px;
     }
-
     .info-item {
       display: flex;
       flex-wrap: wrap;
       border-bottom: 1px solid #eee8e0;
       padding-bottom: 14px;
     }
-
     .info-item:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
-
     .info-label {
       width: 100%;
       font-size: 0.7rem;
@@ -139,7 +203,6 @@
       color: #9b8a78;
       margin-bottom: 2px;
     }
-
     .info-value {
       width: 100%;
       font-size: 1rem;
@@ -147,20 +210,19 @@
       color: #1f1b16;
       line-height: 1.5;
     }
-
     .info-value strong {
       font-weight: 600;
       color: #3d3228;
     }
 
+    /* venue */
     .venue-block {
-      background: #f8f3ec;
+      background: rgba(248, 243, 236, 0.8);
       border-radius: 20px;
       padding: 20px 18px;
       margin: 18px 0 22px;
       border-left: 4px solid #c9b69a;
     }
-
     .venue-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem;
@@ -168,19 +230,16 @@
       color: #2d241b;
       margin-bottom: 4px;
     }
-
     .venue-address {
       font-size: 0.95rem;
       color: #4c4135;
       margin-bottom: 8px;
       line-height: 1.5;
     }
-
     .venue-contact {
       font-size: 0.9rem;
       color: #5f5342;
     }
-
     .map-button {
       display: inline-flex;
       align-items: center;
@@ -197,20 +256,30 @@
       margin-top: 6px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
-
     .map-button:hover {
       background: #f0e8de;
       border-color: #b8a187;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
+    /* photo placeholder */
+    .photo-placeholder {
+      background: rgba(243, 237, 230, 0.7);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      color: #7a6e5d;
+      margin: 12px 0 10px;
+      border: 1px dashed #d6cbbc;
+      font-size: 0.95rem;
+    }
+
+    /* RSVP */
     .rsvp-section {
       margin: 28px 0 16px;
-      background: #fcf9f6;
+      background: rgba(252, 249, 246, 0.85);
       border-radius: 24px;
       padding: 22px 18px;
     }
-
     .rsvp-title {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
@@ -219,7 +288,6 @@
       margin-bottom: 12px;
       color: #1f1b16;
     }
-
     .rsvp-options {
       display: flex;
       flex-wrap: wrap;
@@ -227,7 +295,6 @@
       gap: 12px 20px;
       margin-bottom: 16px;
     }
-
     .rsvp-options label {
       display: flex;
       align-items: center;
@@ -236,14 +303,12 @@
       font-weight: 400;
       cursor: pointer;
     }
-
     .rsvp-options input[type="radio"] {
       accent-color: #a58d74;
       width: 18px;
       height: 18px;
       margin: 0;
     }
-
     .rsvp-row {
       display: flex;
       flex-wrap: wrap;
@@ -254,12 +319,10 @@
       padding-top: 14px;
       border-top: 1px solid #e7dfd6;
     }
-
     .rsvp-row label {
       font-weight: 500;
       color: #3d3228;
     }
-
     .rsvp-row input, .rsvp-row select {
       padding: 8px 14px;
       border-radius: 40px;
@@ -270,24 +333,22 @@
       flex: 1;
       min-width: 120px;
     }
-
     .rsvp-row input:focus, .rsvp-row select:focus {
       outline: 2px solid #c9b69a;
       border-color: transparent;
     }
-
     .guest-count {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .guest-count input {
       width: 80px;
       flex: 0 1 auto;
     }
 
+    /* share buttons */
     .share-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -295,7 +356,6 @@
       gap: 12px;
       margin: 28px 0 8px;
     }
-
     .share-btn {
       display: inline-flex;
       align-items: center;
@@ -309,11 +369,9 @@
       font-size: 0.95rem;
       transition: background 0.15s ease;
     }
-
     .share-btn:hover {
       background: #e3d8cc;
     }
-
     .share-btn.whatsapp {
       background: #25D366;
       color: white;
@@ -322,6 +380,7 @@
       background: #1da851;
     }
 
+    /* footer */
     .footer-note {
       text-align: center;
       font-size: 0.8rem;
@@ -332,70 +391,117 @@
       letter-spacing: 0.3px;
     }
 
-    .photo-placeholder {
-      background: #f3ede6;
-      border-radius: 20px;
-      padding: 40px 20px;
-      text-align: center;
-      color: #7a6e5d;
-      margin: 12px 0 10px;
-      border: 1px dashed #d6cbbc;
-      font-size: 0.95rem;
-    }
-
-    /* small screen tweaks */
+    /* small screen */
     @media (max-width: 480px) {
       h1 { font-size: 1.8rem; }
       .couple-names h2 { font-size: 1.5rem; }
       .invitation-card { padding: 24px 16px; }
       .rsvp-row { flex-direction: column; align-items: stretch; }
       .guest-count input { width: 100%; }
+      .geo-pattern { width: 160vmax; height: 160vmax; }
+      .geo-pattern-2 { width: 120vmax; height: 120vmax; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== GEOMETRIC BACKGROUND ===== -->
+  <div class="geo-bg">
+    <!-- Main rotating 8-pointed star pattern -->
+    <svg class="geo-pattern" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <g id="star8">
+          <polygon points="100,5 118,82 100,60 82,82" fill="#b8a187" opacity="0.8"/>
+          <polygon points="195,100 118,118 140,100 118,82" fill="#c9b69a" opacity="0.6"/>
+          <polygon points="100,195 82,118 100,140 118,118" fill="#b8a187" opacity="0.8"/>
+          <polygon points="5,100 82,82 60,100 82,118" fill="#c9b69a" opacity="0.6"/>
+          <!-- diamond connectors -->
+          <polygon points="100,30 130,100 100,170 70,100" fill="none" stroke="#d4c5b2" stroke-width="1.5" opacity="0.5"/>
+        </g>
+      </defs>
+      <!-- repeat pattern -->
+      <use href="#star8" x="0" y="0" />
+      <use href="#star8" x="200" y="0" />
+      <use href="#star8" x="0" y="200" />
+      <use href="#star8" x="200" y="200" />
+      <use href="#star8" x="100" y="0" />
+      <use href="#star8" x="0" y="100" />
+      <use href="#star8" x="100" y="200" />
+      <use href="#star8" x="200" y="100" />
+      <use href="#star8" x="100" y="100" />
+      <!-- additional interlocking diamonds -->
+      <g opacity="0.3">
+        <polygon points="50,50 100,80 150,50 100,20" fill="none" stroke="#b8a187" stroke-width="1" />
+        <polygon points="50,150 100,120 150,150 100,180" fill="none" stroke="#b8a187" stroke-width="1" />
+        <polygon points="50,50 80,100 50,150 20,100" fill="none" stroke="#b8a187" stroke-width="1" />
+        <polygon points="150,50 120,100 150,150 180,100" fill="none" stroke="#b8a187" stroke-width="1" />
+      </g>
+    </svg>
+
+    <!-- Secondary smaller pattern (counter-rotate) -->
+    <svg class="geo-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <g id="octa">
+          <polygon points="50,5 68,32 95,50 68,68 50,95 32,68 5,50 32,32" fill="none" stroke="#d4c5b2" stroke-width="1.2" opacity="0.4"/>
+          <polygon points="50,20 60,50 50,80 40,50" fill="#c9b69a" opacity="0.2"/>
+        </g>
+      </defs>
+      <use href="#octa" x="0" y="0" />
+      <use href="#octa" x="100" y="0" />
+      <use href="#octa" x="0" y="100" />
+      <use href="#octa" x="100" y="100" />
+      <use href="#octa" x="50" y="0" />
+      <use href="#octa" x="0" y="50" />
+      <use href="#octa" x="50" y="100" />
+      <use href="#octa" x="100" y="50" />
+      <use href="#octa" x="50" y="50" />
+    </svg>
+
+    <!-- Floating star particles -->
+    <div class="geo-particle"></div>
+    <div class="geo-particle"></div>
+    <div class="geo-particle"></div>
+    <div class="geo-particle"></div>
+    <div class="geo-particle"></div>
+  </div>
+
+  <!-- ===== INVITATION CARD ===== -->
   <div class="invitation-card">
-    
-    <!-- Bismillah & title -->
+
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
     <div class="divider"></div>
-    
+
     <h1>Wedding Invitation</h1>
     <div class="subhead">By the grace of Allah, we invite you to celebrate</div>
-    
     <div class="divider-thick"></div>
-    
-    <!-- Couple -->
+
     <div class="couple-names">
       <h2>Abdul Kalam Azad Baqavi</h2>
       <div style="font-size:1.2rem; color:#7a6e5d; margin:4px 0;">&amp;</div>
       <h2>Majidha Nasrin Hidaya</h2>
     </div>
-    
+
     <div class="divider" style="margin:12px auto;"></div>
-    
-    <!-- Groom & Bride details -->
+
     <div class="info-grid">
       <div class="info-item">
         <span class="info-label">🤵 Groom</span>
-        <span class="info-value"><strong>Abdul Kalam Azad Baqavi</strong><br>Son of Mr. K.V. Aboobacker &amp; Mrs. Sumayya Backer<br>Karuveettil (H), Pulikkakadav, Kanjiramukk</span>
+        <span class="info-value"><strong>Abdul Kalam Azad Baqavi</strong><br />Son of Mr. K.V. Aboobacker &amp; Mrs. Sumayya Backer<br />Karuveettil (H), Pulikkakadav, Kanjiramukk</span>
       </div>
       <div class="info-item">
         <span class="info-label">👰 Bride</span>
-        <span class="info-value"><strong>Majidha Nasrin Hidaya</strong><br>Daughter of Mr. Muhammed Hassan &amp; Mrs. Sabira Hassan<br>Paredath House, Moolakkal, Thanoor, Malappuram</span>
+        <span class="info-value"><strong>Majidha Nasrin Hidaya</strong><br />Daughter of Mr. Muhammed Hassan &amp; Mrs. Sabira Hassan<br />Paredath House, Moolakkal, Thanoor, Malappuram</span>
       </div>
     </div>
-    
-    <!-- Date & Time -->
-    <div style="background:#f8f3ec; border-radius:20px; padding:18px 16px; margin:18px 0 12px;">
+
+    <div style="background:rgba(248,243,236,0.7); border-radius:20px; padding:18px 16px; margin:18px 0 12px;">
       <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 12px;">
         <div><span style="font-weight:600; color:#3d3228;">📅 Date:</span> Saturday, September 5, 2026</div>
         <div><span style="font-weight:600; color:#3d3228;">🕌 Islamic:</span> 23 Rabee-Ul-Awwal 1448 AH</div>
         <div><span style="font-weight:600; color:#3d3228;">⏰ Reception:</span> 5:00 PM – 9:00 PM</div>
       </div>
     </div>
-    
-    <!-- Venue with map link -->
+
     <div class="venue-block">
       <div class="venue-name">📍 Blossom Palace</div>
       <div class="venue-address">QX65+XVV, Purangu, Guruvayur - Althara - Ponnani Rd, Kerala 679584, India</div>
@@ -404,29 +510,24 @@
         <span>🗺️</span> Get Directions on Google Maps
       </a>
     </div>
-    
-    <!-- Photo gallery placeholder (optional) -->
+
     <div class="photo-placeholder">
       📸 <span style="display:block; margin-top:6px; font-weight:400;">Upload your couple &amp; venue photos here</span>
     </div>
-    
-    <!-- RSVP section -->
+
     <div class="rsvp-section">
       <div class="rsvp-title">🙋 RSVP</div>
       <p style="text-align:center; color:#5f5342; margin-bottom:16px; font-size:0.95rem;">Kindly confirm your presence</p>
-      
       <div class="rsvp-options">
-        <label><input type="radio" name="attendance" value="attend"> Will Attend</label>
-        <label><input type="radio" name="attendance" value="not-attend"> Will Not Attend</label>
+        <label><input type="radio" name="attendance" value="attend" /> Will Attend</label>
+        <label><input type="radio" name="attendance" value="not-attend" /> Will Not Attend</label>
       </div>
-      
       <div class="rsvp-row">
         <label for="guests">Number of Guests</label>
         <div class="guest-count">
-          <input type="number" id="guests" min="1" value="1" style="width:80px;">
+          <input type="number" id="guests" min="1" value="1" />
         </div>
       </div>
-      
       <div class="rsvp-row">
         <label for="meal">Meal Preference</label>
         <select id="meal">
@@ -434,12 +535,9 @@
           <option value="non-vegetarian" selected>Non-Vegetarian</option>
         </select>
       </div>
-      
-      <!-- subtle note: this is a demo, no backend -->
       <p style="font-size:0.75rem; color:#9b8a78; text-align:center; margin-top:12px;">(Demo RSVP — ready to connect to your preferred platform)</p>
     </div>
-    
-    <!-- Share buttons -->
+
     <div class="share-buttons">
       <a href="https://wa.me/?text=You're invited to the wedding of Abdul Kalam & Majidha!%0A📅 Sept 5, 2026, 5-9 PM%0A📍 Blossom Palace, Purangu%0A🗺️ https://maps.app.goo.gl/tnPpUdz6ByG9YaVH9?g_st=aw" target="_blank" rel="noopener" class="share-btn whatsapp">
         <span>📱</span> Share on WhatsApp
@@ -451,14 +549,14 @@
         <span>📘</span> Facebook
       </a>
     </div>
-    
-    <!-- Footer -->
+
     <div class="footer-note">
       <span style="display:block; font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:4px;">✨</span>
-      We look forward to celebrating with you<br>
+      We look forward to celebrating with you<br />
       <span style="font-size:0.7rem; letter-spacing:1px;">Blossom Palace · Purangu · Kerala</span>
     </div>
-    
+
   </div>
+
 </body>
 </html>
