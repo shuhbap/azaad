@@ -80,15 +80,15 @@
         }
 
         /* ========================================
-                   THEME TOGGLE BUTTON - TOP RIGHT
+                   SETTINGS BUTTON (THEME + LANG) - TOP RIGHT
                 ======================================== */
-        .theme-toggle {
+        .settings-toggle {
             position: fixed;
             top: 16px;
             right: 16px;
             z-index: 100;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             background: var(--bg-container);
@@ -101,26 +101,135 @@
             justify-content: center;
             transition: var(--transition);
             box-shadow: var(--shadow-color);
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 300;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
 
-        .theme-toggle:hover {
+        .settings-toggle:hover {
             transform: scale(1.08);
             box-shadow: var(--shadow-gold);
             border-color: var(--gold);
         }
 
-        .theme-toggle svg {
-            width: 20px;
-            height: 20px;
+        .settings-toggle svg {
+            width: 22px;
+            height: 22px;
             fill: none;
             stroke: var(--gold);
-            stroke-width: 1.5;
+            stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+
+        /* Settings Dropdown Panel */
+        .settings-panel {
+            position: fixed;
+            top: 70px;
+            right: 16px;
+            z-index: 99;
+            background: var(--bg-container);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            padding: 16px 20px 20px;
+            min-width: 160px;
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+            animation: panelIn 0.25s ease;
+            transition: var(--transition);
+        }
+
+        .settings-panel.open {
+            display: flex;
+        }
+
+        @keyframes panelIn {
+            0% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .settings-panel .section-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+            margin-bottom: 2px;
+        }
+
+        .settings-panel .lang-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .settings-panel .lang-btn {
+            flex: 1;
+            min-width: 44px;
+            padding: 6px 0;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .settings-panel .lang-btn.active {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            box-shadow: 0 4px 12px rgba(201,168,76,0.15);
+        }
+
+        .settings-panel .lang-btn:hover:not(.active) {
+            border-color: var(--gold-light);
+            background: var(--gold-pale);
+        }
+
+        .settings-panel .theme-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .settings-panel .theme-btn {
+            flex: 1;
+            padding: 6px 0;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .settings-panel .theme-btn.active {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            box-shadow: 0 4px 12px rgba(201,168,76,0.15);
+        }
+
+        .settings-panel .theme-btn:hover:not(.active) {
+            border-color: var(--gold-light);
+            background: var(--gold-pale);
         }
 
         /* ========================================
@@ -186,27 +295,14 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
-
         @keyframes spinReverse {
-            to {
-                transform: rotate(-360deg);
-            }
+            to { transform: rotate(-360deg); }
         }
-
         @keyframes pulseDot {
-            0%,
-            100% {
-                transform: scale(0.6);
-                opacity: 0.4;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
+            0%, 100% { transform: scale(0.6); opacity: 0.4; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
 
         .loader-text {
@@ -219,19 +315,11 @@
             animation: fadeInOut 2s ease-in-out infinite;
         }
 
-        .loader-text span {
-            color: var(--text-primary);
-            font-weight: 300;
-        }
+        .loader-text span { color: var(--text-primary); font-weight: 300; }
 
         @keyframes fadeInOut {
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
         .loader-progress {
@@ -253,12 +341,8 @@
         }
 
         @keyframes progressLoad {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
         /* ========================================
@@ -272,7 +356,6 @@
             opacity: 0.25;
         }
 
-        /* Floating Gold Orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -289,7 +372,6 @@
             right: -80px;
             animation-delay: 0s;
         }
-
         .orb:nth-child(2) {
             width: 350px;
             height: 350px;
@@ -297,7 +379,6 @@
             left: -120px;
             animation-delay: -7s;
         }
-
         .orb:nth-child(3) {
             width: 180px;
             height: 180px;
@@ -309,19 +390,10 @@
         }
 
         @keyframes floatOrb {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(30px, -40px) scale(1.1);
-            }
-            50% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-            75% {
-                transform: translate(40px, 30px) scale(1.05);
-            }
+            0%, 100% { transform: translate(0,0) scale(1); }
+            25% { transform: translate(30px, -40px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(40px, 30px) scale(1.05); }
         }
 
         /* ========================================
@@ -345,18 +417,12 @@
         }
 
         @keyframes containerFade {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.97);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            0% { opacity: 0; transform: translateY(30px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* ========================================
-                   HEADER - PREMIUM
+                   HEADER
                 ======================================== */
         .header {
             text-align: center;
@@ -366,14 +432,8 @@
         }
 
         @keyframes fadeDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .header .monogram {
@@ -386,7 +446,6 @@
             position: relative;
             display: inline-block;
         }
-
         .header .monogram::after {
             content: '';
             position: absolute;
@@ -398,17 +457,9 @@
             background: var(--gold);
             animation: lineGrow 1.2s ease-out 0.6s forwards;
         }
+        @keyframes lineGrow { to { width: 50%; } }
 
-        @keyframes lineGrow {
-            to {
-                width: 50%;
-            }
-        }
-
-        .header .monogram span {
-            color: var(--text-primary);
-            font-weight: 200;
-        }
+        .header .monogram span { color: var(--text-primary); font-weight: 200; }
 
         .header .divider {
             width: 60px;
@@ -419,14 +470,8 @@
         }
 
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: scaleX(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scaleX(1);
-            }
+            0% { opacity: 0; transform: scaleX(0.5); }
+            100% { opacity: 1; transform: scaleX(1); }
         }
 
         .header .subtitle {
@@ -449,14 +494,8 @@
         }
 
         @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .couple-names .names {
@@ -478,17 +517,12 @@
         }
 
         @keyframes ampersandPulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.08);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
         /* ========================================
-                   COUNTDOWN TIMER
+                   COUNTDOWN TIMER (target: Sept 5, 2026)
                 ======================================== */
         .countdown {
             display: grid;
@@ -532,7 +566,7 @@
         }
 
         /* ========================================
-                   CALENDAR BUTTONS - SMALL & PREMIUM
+                   CALENDAR BUTTONS
                 ======================================== */
         .calendar-actions {
             display: flex;
@@ -566,13 +600,10 @@
             box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15);
             transform: translateY(-1px);
         }
-
-        .calendar-btn:active {
-            transform: scale(0.95);
-        }
+        .calendar-btn:active { transform: scale(0.95); }
 
         /* ========================================
-                   PREMIUM PERSON CARDS - SIDE BY SIDE
+                   PERSON CARDS
                 ======================================== */
         .persons {
             display: grid;
@@ -595,38 +626,17 @@
             align-items: center;
             text-align: center;
         }
-
-        .person-card:nth-child(1) {
-            animation-delay: 0.3s;
-        }
-        .person-card:nth-child(2) {
-            animation-delay: 0.5s;
-        }
+        .person-card:nth-child(1) { animation-delay: 0.3s; }
+        .person-card:nth-child(2) { animation-delay: 0.5s; }
 
         @keyframes cardSlide {
-            0% {
-                opacity: 0;
-                transform: translateX(-15px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
-
-        .person-card:nth-child(2) {
-            animation-name: cardSlideRight;
-        }
-
+        .person-card:nth-child(2) { animation-name: cardSlideRight; }
         @keyframes cardSlideRight {
-            0% {
-                opacity: 0;
-                transform: translateX(15px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            0% { opacity: 0; transform: translateX(15px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
 
         .person-card:hover {
@@ -648,10 +658,7 @@
             transform-origin: center;
             transition: transform 0.5s ease;
         }
-
-        .person-card:hover::before {
-            transform: scaleX(1);
-        }
+        .person-card:hover::before { transform: scaleX(1); }
 
         .person-card .role {
             font-family: 'Cormorant Garamond', serif;
@@ -686,7 +693,6 @@
             font-weight: 600;
             position: relative;
         }
-
         .person-card .parents .highlight::after {
             content: '';
             position: absolute;
@@ -699,10 +705,7 @@
             transform-origin: center;
             transition: transform 0.3s ease;
         }
-
-        .person-card:hover .parents .highlight::after {
-            transform: scaleX(1);
-        }
+        .person-card:hover .parents .highlight::after { transform: scaleX(1); }
 
         .person-card .address {
             font-family: 'Inter', sans-serif;
@@ -717,7 +720,7 @@
         }
 
         /* ========================================
-                   EVENTS - PREMIUM BORDER
+                   EVENTS
                 ======================================== */
         .events {
             display: flex;
@@ -737,23 +740,12 @@
             animation: eventFade 0.7s ease-out both;
             overflow: hidden;
         }
-
-        .event:nth-child(1) {
-            animation-delay: 0.7s;
-        }
-        .event:nth-child(2) {
-            animation-delay: 0.9s;
-        }
+        .event:nth-child(1) { animation-delay: 0.7s; }
+        .event:nth-child(2) { animation-delay: 0.9s; }
 
         @keyframes eventFade {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .event::before {
@@ -765,11 +757,7 @@
             transition: opacity 0.5s ease;
             border-radius: 16px;
         }
-
-        .event:hover::before {
-            opacity: 1;
-        }
-
+        .event:hover::before { opacity: 1; }
         .event:hover {
             box-shadow: var(--shadow-gold);
             transform: translateY(-2px);
@@ -830,20 +818,17 @@
             position: relative;
             transition: var(--transition);
         }
-
         .map-box:hover {
             transform: scale(1.02);
             box-shadow: var(--shadow-gold);
             border-color: var(--gold-light);
         }
-
         .map-box iframe {
             width: 100%;
             height: 100%;
             border: 0;
             display: block;
         }
-
         .map-label {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
@@ -892,9 +877,7 @@
             z-index: 1;
         }
 
-        .media-toggle button.active {
-            color: var(--white);
-        }
+        .media-toggle button.active { color: var(--white); }
 
         .media-toggle .toggle-slider {
             position: absolute;
@@ -907,10 +890,7 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15);
         }
-
-        .media-toggle .toggle-slider.right {
-            transform: translateX(100%);
-        }
+        .media-toggle .toggle-slider.right { transform: translateX(100%); }
 
         .media-display {
             border-radius: 16px;
@@ -931,34 +911,13 @@
             display: none;
             animation: mediaFade 0.4s ease;
         }
-
         @keyframes mediaFade {
-            0% {
-                opacity: 0;
-                transform: scale(0.98);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
-        .media-display .media-content.active {
-            display: block;
-        }
-
-        .media-display img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .media-display video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: var(--text-primary);
-        }
+        .media-display .media-content.active { display: block; }
+        .media-display img { width: 100%; height: 100%; object-fit: cover; }
+        .media-display video { width: 100%; height: 100%; object-fit: cover; background: var(--text-primary); }
 
         /* ========================================
                    RSVP
@@ -979,7 +938,6 @@
             color: var(--text-primary);
             letter-spacing: 1px;
         }
-
         .rsvp-section .rsvp-title small {
             display: block;
             font-family: 'Cormorant Garamond', serif;
@@ -1034,17 +992,11 @@
             box-shadow: 0 0 0 3px var(--gold-glow);
             transform: translateY(-1px);
         }
-
         .rsvp-form input:hover,
         .rsvp-form select:hover,
-        .rsvp-form textarea:hover {
-            border-color: var(--gold-light);
-        }
+        .rsvp-form textarea:hover { border-color: var(--gold-light); }
 
-        .rsvp-form textarea {
-            resize: vertical;
-            min-height: 50px;
-        }
+        .rsvp-form textarea { resize: vertical; min-height: 50px; }
 
         .rsvp-form .submit-btn {
             background: var(--gold);
@@ -1067,25 +1019,17 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
-        .rsvp-form .submit-btn:hover::after {
-            opacity: 1;
-        }
-
+        .rsvp-form .submit-btn:hover::after { opacity: 1; }
         .rsvp-form .submit-btn:hover {
             background: #b8943c;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(201, 168, 76, 0.2);
         }
-
-        .rsvp-form .submit-btn:active {
-            transform: scale(0.97);
-        }
-
+        .rsvp-form .submit-btn:active { transform: scale(0.97); }
         .rsvp-form .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -1121,7 +1065,6 @@
             font-size: 14px;
             letter-spacing: 0.5px;
         }
-
         .footer .quran small {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
@@ -1145,230 +1088,97 @@
                    RESPONSIVE
                 ======================================== */
         @media (min-width: 600px) {
-            .container {
-                max-width: 520px;
-                padding: 36px 28px 40px;
-                border-radius: 36px;
-                margin: 24px auto;
-            }
-            .header .monogram {
-                font-size: 54px;
-            }
-            .couple-names .names {
-                font-size: 34px;
-            }
-            .couple-names .names .ampersand {
-                font-size: 38px;
-            }
-            .person-card .fullname {
-                font-size: 16px;
-            }
-            .event .event-title {
-                font-size: 20px;
-            }
-            .media-display {
-                max-height: 480px;
-            }
-            .map-box {
-                height: 180px;
-            }
-            .countdown-item .number {
-                font-size: 28px;
-            }
-            .person-card {
-                padding: 20px 16px;
-            }
-            .calendar-btn {
-                padding: 8px 18px;
-                font-size: 12px;
-                min-width: 70px;
-            }
-            .calendar-actions {
-                gap: 8px;
-            }
-            .theme-toggle {
-                top: 20px;
-                right: 20px;
-                width: 44px;
-                height: 44px;
-            }
-            .theme-toggle svg {
-                width: 22px;
-                height: 22px;
-            }
+            .container { max-width: 520px; padding: 36px 28px 40px; border-radius: 36px; margin: 24px auto; }
+            .header .monogram { font-size: 54px; }
+            .couple-names .names { font-size: 34px; }
+            .couple-names .names .ampersand { font-size: 38px; }
+            .person-card .fullname { font-size: 16px; }
+            .event .event-title { font-size: 20px; }
+            .media-display { max-height: 480px; }
+            .map-box { height: 180px; }
+            .countdown-item .number { font-size: 28px; }
+            .person-card { padding: 20px 16px; }
+            .calendar-btn { padding: 8px 18px; font-size: 12px; min-width: 70px; }
+            .calendar-actions { gap: 8px; }
+            .settings-toggle { top: 20px; right: 20px; width: 48px; height: 48px; }
+            .settings-toggle svg { width: 24px; height: 24px; }
+            .settings-panel { top: 80px; right: 20px; min-width: 180px; padding: 18px 22px; }
         }
 
         @media (max-width: 400px) {
-            .container {
-                padding: 18px 12px 24px;
-                border-radius: 20px;
-                margin: 10px auto;
-            }
-            .couple-names .names {
-                font-size: 22px;
-            }
-            .couple-names .names .ampersand {
-                font-size: 26px;
-                padding: 0 6px;
-            }
-            .person-card .fullname {
-                font-size: 13px;
-            }
-            .event .event-title {
-                font-size: 16px;
-            }
-            .header .monogram {
-                font-size: 36px;
-                letter-spacing: 8px;
-            }
-            .media-display {
-                max-height: 280px;
-            }
-            .maps-container {
-                gap: 6px;
-            }
-            .map-box {
-                height: 110px;
-            }
-            .countdown-item .number {
-                font-size: 20px;
-            }
-            .countdown-item .label {
-                font-size: 7px;
-                letter-spacing: 1px;
-            }
-            .countdown {
-                gap: 4px;
-            }
-            .countdown-item {
-                padding: 8px 4px;
-            }
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                width: 34px;
-                height: 34px;
-            }
-            .theme-toggle svg {
-                width: 16px;
-                height: 16px;
-            }
-            .persons {
-                gap: 6px;
-            }
-            .person-card {
-                padding: 12px 8px;
-            }
-            .person-card .parents {
-                font-size: 9px;
-            }
-            .person-card .address {
-                font-size: 8px;
-            }
-            .person-card .role {
-                font-size: 8px;
-                letter-spacing: 2px;
-            }
-            .event {
-                padding: 14px 14px;
-            }
-            .event .event-title {
-                font-size: 16px;
-            }
-            .event .event-date {
-                font-size: 12px;
-            }
-            .event .event-place {
-                font-size: 11px;
-            }
-            .calendar-btn {
-                padding: 5px 10px;
-                font-size: 9px;
-                min-width: 50px;
-                border-radius: 16px;
-            }
-            .calendar-actions {
-                gap: 4px;
-            }
-            .rsvp-section .rsvp-title {
-                font-size: 20px;
-            }
-            .rsvp-form input,
-            .rsvp-form select,
-            .rsvp-form textarea {
-                padding: 8px 12px;
-                font-size: 12px;
-                border-radius: 10px;
-            }
-            .rsvp-form .submit-btn {
-                padding: 11px;
-                font-size: 14px;
-            }
-            .header .subtitle {
-                font-size: 10px;
-                letter-spacing: 5px;
-            }
-            .header .divider {
-                width: 50px;
-            }
+            .container { padding: 18px 12px 24px; border-radius: 20px; margin: 10px auto; }
+            .couple-names .names { font-size: 22px; }
+            .couple-names .names .ampersand { font-size: 26px; padding: 0 6px; }
+            .person-card .fullname { font-size: 13px; }
+            .event .event-title { font-size: 16px; }
+            .header .monogram { font-size: 36px; letter-spacing: 8px; }
+            .media-display { max-height: 280px; }
+            .maps-container { gap: 6px; }
+            .map-box { height: 110px; }
+            .countdown-item .number { font-size: 20px; }
+            .countdown-item .label { font-size: 7px; letter-spacing: 1px; }
+            .countdown { gap: 4px; }
+            .countdown-item { padding: 8px 4px; }
+            .settings-toggle { top: 10px; right: 10px; width: 38px; height: 38px; }
+            .settings-toggle svg { width: 18px; height: 18px; }
+            .settings-panel { top: 62px; right: 10px; min-width: 140px; padding: 12px 14px; }
+            .persons { gap: 6px; }
+            .person-card { padding: 12px 8px; }
+            .person-card .parents { font-size: 9px; }
+            .person-card .address { font-size: 8px; }
+            .person-card .role { font-size: 8px; letter-spacing: 2px; }
+            .event { padding: 14px 14px; }
+            .event .event-title { font-size: 16px; }
+            .event .event-date { font-size: 12px; }
+            .event .event-place { font-size: 11px; }
+            .calendar-btn { padding: 5px 10px; font-size: 9px; min-width: 50px; border-radius: 16px; }
+            .calendar-actions { gap: 4px; }
+            .rsvp-section .rsvp-title { font-size: 20px; }
+            .rsvp-form input, .rsvp-form select, .rsvp-form textarea { padding: 8px 12px; font-size: 12px; border-radius: 10px; }
+            .rsvp-form .submit-btn { padding: 11px; font-size: 14px; }
+            .header .subtitle { font-size: 10px; letter-spacing: 5px; }
+            .header .divider { width: 50px; }
         }
 
         @media (max-width: 360px) {
-            .container {
-                padding: 14px 8px 18px;
-                border-radius: 16px;
-            }
-            .couple-names .names {
-                font-size: 18px;
-            }
-            .couple-names .names .ampersand {
-                font-size: 22px;
-            }
-            .person-card .fullname {
-                font-size: 12px;
-            }
-            .person-card {
-                padding: 10px 6px;
-            }
-            .event .event-title {
-                font-size: 14px;
-            }
-            .event {
-                padding: 12px 12px;
-            }
-            .countdown-item .number {
-                font-size: 18px;
-            }
-            .countdown-item {
-                padding: 6px 2px;
-            }
-            .map-box {
-                height: 90px;
-            }
-            .media-display {
-                max-height: 240px;
-            }
-            .calendar-btn {
-                padding: 4px 8px;
-                font-size: 8px;
-                min-width: 40px;
-                border-radius: 14px;
-            }
-            .header .monogram {
-                font-size: 30px;
-                letter-spacing: 6px;
-            }
+            .container { padding: 14px 8px 18px; border-radius: 16px; }
+            .couple-names .names { font-size: 18px; }
+            .couple-names .names .ampersand { font-size: 22px; }
+            .person-card .fullname { font-size: 12px; }
+            .person-card { padding: 10px 6px; }
+            .event .event-title { font-size: 14px; }
+            .event { padding: 12px 12px; }
+            .countdown-item .number { font-size: 18px; }
+            .countdown-item { padding: 6px 2px; }
+            .map-box { height: 90px; }
+            .media-display { max-height: 240px; }
+            .calendar-btn { padding: 4px 8px; font-size: 8px; min-width: 40px; border-radius: 14px; }
+            .header .monogram { font-size: 30px; letter-spacing: 6px; }
+            .settings-toggle { width: 34px; height: 34px; }
+            .settings-toggle svg { width: 16px; height: 16px; }
+            .settings-panel { min-width: 120px; padding: 10px 12px; top: 56px; right: 6px; }
         }
 
-        /* ========================================
-                   UTILITY
-                ======================================== */
-        .text-gold {
-            color: var(--gold);
+        .text-gold { color: var(--gold); }
+        .text-muted { color: var(--text-secondary); }
+
+        /* language helper */
+        [data-lang="ml"] .lang-en,
+        [data-lang="ar"] .lang-en,
+        [data-lang="ml"] .lang-ar,
+        [data-lang="en"] .lang-ml,
+        [data-lang="ar"] .lang-ml,
+        [data-lang="en"] .lang-ar {
+            display: none !important;
         }
-        .text-muted {
-            color: var(--text-secondary);
-        }
+        [data-lang="ml"] .lang-ml { display: inline; }
+        [data-lang="ar"] .lang-ar { display: inline; }
+        [data-lang="en"] .lang-en { display: inline; }
+
+        .lang-ml, .lang-ar, .lang-en { display: none; }
+        [data-lang="ml"] .lang-ml { display: inline; }
+        [data-lang="ar"] .lang-ar { display: inline; }
+        [data-lang="en"] .lang-en { display: inline; }
     </style>
 </head>
 <body>
@@ -1379,21 +1189,36 @@
     <div class="orb"></div>
 
     <!-- ========================================
-    THEME TOGGLE - TOP RIGHT
+    SETTINGS BUTTON (THEME + LANG) - TOP RIGHT
     ======================================== -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <button class="settings-toggle" id="settingsToggle" aria-label="Settings">
         <svg viewBox="0 0 24 24">
-            <path d="M12 3a6 6 0 0 0 9 9 6 6 0 1 1-9-9Z" />
-            <path d="M12 7v1" />
-            <path d="M12 16v1" />
-            <path d="M7 12h1" />
-            <path d="M16 12h1" />
-            <path d="M9.5 9.5l.7.7" />
-            <path d="M13.8 13.8l.7.7" />
-            <path d="M9.5 14.5l.7-.7" />
-            <path d="M13.8 10.2l.7-.7" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 1v3" />
+            <path d="M12 20v3" />
+            <path d="M4.22 4.22l2.12 2.12" />
+            <path d="M17.66 17.66l2.12 2.12" />
+            <path d="M1 12h3" />
+            <path d="M20 12h3" />
+            <path d="M4.22 19.78l2.12-2.12" />
+            <path d="M17.66 6.34l2.12-2.12" />
         </svg>
     </button>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="section-label">Language</div>
+        <div class="lang-group">
+            <button class="lang-btn active" data-lang="en" onclick="setLang('en')">ENG</button>
+            <button class="lang-btn" data-lang="ml" onclick="setLang('ml')">മല</button>
+            <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+        </div>
+        <div class="section-label" style="margin-top:4px;">Theme</div>
+        <div class="theme-row">
+            <button class="theme-btn active" data-theme="light" onclick="setTheme('light')">Light</button>
+            <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">Dark</button>
+        </div>
+    </div>
 
     <!-- ========================================
     PREMIUM LOADING SCREEN
@@ -1418,13 +1243,17 @@
     <!-- ========================================
     MAIN CONTAINER
     ======================================== -->
-    <div class="container" id="mainContent">
+    <div class="container" id="mainContent" data-lang="en">
 
         <!-- HEADER -->
         <div class="header">
-            <div class="monogram">A<span>&</span>N</div>
+            <div class="monogram">A<span>&</span>M</div>
             <div class="divider"></div>
-            <div class="subtitle">Wedding Invitation</div>
+            <div class="subtitle">
+                <span class="lang-en">Wedding Invitation</span>
+                <span class="lang-ml">വിവാഹ ക്ഷണം</span>
+                <span class="lang-ar">دعوة زفاف</span>
+            </div>
         </div>
 
         <!-- COUPLE NAMES -->
@@ -1437,55 +1266,81 @@
         </div>
 
         <!-- ========================================
-        COUNTDOWN TIMER
+        COUNTDOWN TIMER (target: Sept 5, 2026)
         ======================================== -->
         <div class="countdown" id="countdown">
             <div class="countdown-item">
                 <span class="number" id="days">00</span>
-                <span class="label">Days</span>
+                <span class="label">
+                    <span class="lang-en">Days</span>
+                    <span class="lang-ml">ദിവസം</span>
+                    <span class="lang-ar">أيام</span>
+                </span>
             </div>
             <div class="countdown-item">
                 <span class="number" id="hours">00</span>
-                <span class="label">Hours</span>
+                <span class="label">
+                    <span class="lang-en">Hours</span>
+                    <span class="lang-ml">മണിക്കൂർ</span>
+                    <span class="lang-ar">ساعات</span>
+                </span>
             </div>
             <div class="countdown-item">
                 <span class="number" id="minutes">00</span>
-                <span class="label">Minutes</span>
+                <span class="label">
+                    <span class="lang-en">Minutes</span>
+                    <span class="lang-ml">മിനിറ്റ്</span>
+                    <span class="lang-ar">دقائق</span>
+                </span>
             </div>
             <div class="countdown-item">
                 <span class="number" id="seconds">00</span>
-                <span class="label">Seconds</span>
+                <span class="label">
+                    <span class="lang-en">Seconds</span>
+                    <span class="lang-ml">സെക്കൻഡ്</span>
+                    <span class="lang-ar">ثواني</span>
+                </span>
             </div>
         </div>
 
-        <!-- ========================================
-        CALENDAR BUTTONS - SMALL & PREMIUM
-        ======================================== -->
+        <!-- CALENDAR BUTTONS -->
         <div class="calendar-actions">
             <button class="calendar-btn" onclick="saveToCalendar('google')">Google</button>
             <button class="calendar-btn" onclick="saveToCalendar('apple')">Apple</button>
             <button class="calendar-btn" onclick="saveToCalendar('outlook')">Outlook</button>
         </div>
 
-        <!-- ========================================
-        PERSON CARDS - SIDE BY SIDE
-        ======================================== -->
+        <!-- PERSON CARDS -->
         <div class="persons">
             <div class="person-card">
-                <div class="role">Groom</div>
+                <div class="role">
+                    <span class="lang-en">Groom</span>
+                    <span class="lang-ml">വരൻ</span>
+                    <span class="lang-ar">العريس</span>
+                </div>
                 <div class="fullname">Abdul Kalam Azad Baqavi</div>
                 <div class="parents">
-                    Son of <span class="highlight">Mr. K.V. Aboobacker</span><br />
+                    <span class="lang-en">Son of </span>
+                    <span class="lang-ml">മകൻ </span>
+                    <span class="lang-ar">ابن </span>
+                    <span class="highlight">Mr. K.V. Aboobacker</span><br />
                     <span class="highlight">Mrs. Sumayya Backer</span>
                 </div>
                 <div class="address">Karuveettil House, Pulikkakadav, Kanjiramukku</div>
             </div>
 
             <div class="person-card">
-                <div class="role">Bride</div>
+                <div class="role">
+                    <span class="lang-en">Bride</span>
+                    <span class="lang-ml">വധു</span>
+                    <span class="lang-ar">العروس</span>
+                </div>
                 <div class="fullname">Majidha Nasrin Hidaya</div>
                 <div class="parents">
-                    Daughter of <span class="highlight">Mr. Muhammed Hassan</span><br />
+                    <span class="lang-en">Daughter of </span>
+                    <span class="lang-ml">മകൾ </span>
+                    <span class="lang-ar">ابنة </span>
+                    <span class="highlight">Mr. Muhammed Hassan</span><br />
                     <span class="highlight">Mrs. Sabira Hassan</span>
                 </div>
                 <div class="address">Paredath House, Moolakkal, Thanoor, Malappuram</div>
@@ -1495,39 +1350,47 @@
         <!-- EVENTS -->
         <div class="events">
             <div class="event">
-                <div class="event-label">Nikkah</div>
+                <div class="event-label">
+                    <span class="lang-en">Nikkah</span>
+                    <span class="lang-ml">നിക്കാഹ്</span>
+                    <span class="lang-ar">النكاح</span>
+                </div>
                 <div class="event-title">04 September 2026</div>
-                <div class="event-date">Friday</div>
+                <div class="event-date">
+                    <span class="lang-en">Friday</span>
+                    <span class="lang-ml">വെള്ളിയാഴ്ച</span>
+                    <span class="lang-ar">الجمعة</span>
+                </div>
                 <div class="event-place">Puthentheru Juma Masjid</div>
             </div>
 
             <div class="event">
-                <div class="event-label">Reception</div>
+                <div class="event-label">
+                    <span class="lang-en">Reception</span>
+                    <span class="lang-ml">സ്വീകരണം</span>
+                    <span class="lang-ar">الاستقبال</span>
+                </div>
                 <div class="event-title">05 September 2026</div>
-                <div class="event-date">Saturday &middot; 5:00 PM</div>
+                <div class="event-date">
+                    <span class="lang-en">Saturday · 5:00 PM</span>
+                    <span class="lang-ml">ശനിയാഴ്ച · 5:00 PM</span>
+                    <span class="lang-ar">السبت · 5:00 مساءً</span>
+                </div>
                 <div class="event-place">Blossom Palace, Purangu</div>
             </div>
         </div>
 
-        <!-- MAPS - SATELLITE VIEW -->
+        <!-- MAPS -->
         <div class="maps-container">
             <div>
                 <div class="map-box">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=Puthentheru%20Juma%20Masjid&t=k&z=17&ie=UTF8&iwloc=&output=embed"
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                    <iframe src="https://maps.google.com/maps?q=Puthentheru%20Juma%20Masjid&t=k&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <div class="map-label">Puthentheru Juma Masjid</div>
             </div>
             <div>
                 <div class="map-box">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=Blossom%20Palace%20Purangu&t=k&z=17&ie=UTF8&iwloc=&output=embed"
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                    <iframe src="https://maps.google.com/maps?q=Blossom%20Palace%20Purangu&t=k&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <div class="map-label">Blossom Palace</div>
             </div>
@@ -1537,8 +1400,16 @@
         <div class="media-section">
             <div class="media-toggle">
                 <div class="toggle-slider" id="toggleSlider"></div>
-                <button class="active" data-target="poster" onclick="switchMedia('poster')">Poster</button>
-                <button data-target="reel" onclick="switchMedia('reel')">Reel</button>
+                <button class="active" data-target="poster" onclick="switchMedia('poster')">
+                    <span class="lang-en">Poster</span>
+                    <span class="lang-ml">പോസ്റ്റർ</span>
+                    <span class="lang-ar">ملصق</span>
+                </button>
+                <button data-target="reel" onclick="switchMedia('reel')">
+                    <span class="lang-en">Reel</span>
+                    <span class="lang-ml">റീൽ</span>
+                    <span class="lang-ar">فيديو</span>
+                </button>
             </div>
             <div class="media-display">
                 <img class="media-content active" id="posterContent" src="https://xenocdn.xenocdn.workers.dev/0dd8d0f9.jpeg" alt="Wedding Poster" loading="lazy" />
@@ -1552,47 +1423,96 @@
         <!-- RSVP -->
         <div class="rsvp-section">
             <div class="rsvp-title">
-                RSVP
-                <small>Kindly confirm your presence</small>
+                <span class="lang-en">RSVP</span>
+                <span class="lang-ml">ആർ.എസ്.വി.പി</span>
+                <span class="lang-ar">ردّ</span>
+                <small>
+                    <span class="lang-en">Kindly confirm your presence</span>
+                    <span class="lang-ml">ദയവായി നിങ്ങളുടെ സാന്നിധ്യം സ്ഥിരീകരിക്കുക</span>
+                    <span class="lang-ar">يرجى تأكيد حضوركم</span>
+                </small>
             </div>
 
             <form class="rsvp-form" id="rsvpForm"
             action="https://docs.google.com/forms/d/e/1FAIpQLSdx0aJ-DDerwrzuMysM9Lc9Z9qOrdM8HNDiEanADLPDwfnZgw/viewform?usp=dialog"
-            method="POST"
-            target="hiddenFrame">
+            method="POST" target="hiddenFrame">
 
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">
+                    <span class="lang-en">Full Name</span>
+                    <span class="lang-ml">പൂർണ്ണനാമം</span>
+                    <span class="lang-ar">الاسم الكامل</span>
+                </label>
                 <input type="text" id="name" name="entry.2005620554" placeholder="Enter your full name" required />
             </div>
 
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+                <label for="phone">
+                    <span class="lang-en">Phone Number</span>
+                    <span class="lang-ml">ഫോൺ നമ്പർ</span>
+                    <span class="lang-ar">رقم الهاتف</span>
+                </label>
                 <input type="tel" id="phone" name="entry.1166974658" placeholder="Phone with country code" required />
             </div>
 
             <div class="form-group">
-                <label for="attending">Attendance</label>
+                <label for="attending">
+                    <span class="lang-en">Attendance</span>
+                    <span class="lang-ml">ഹാജർ</span>
+                    <span class="lang-ar">الحضور</span>
+                </label>
                 <select id="attending" name="entry.839337160" required>
-                    <option value="">Select an option</option>
-                    <option value="Yes, I will attend">Yes, I will attend</option>
-                    <option value="Yes, with family">Yes, with family</option>
-                    <option value="No, I cannot attend">No, I cannot attend</option>
+                    <option value="">
+                        <span class="lang-en">Select an option</span>
+                        <span class="lang-ml">ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക</span>
+                        <span class="lang-ar">اختر خياراً</span>
+                    </option>
+                    <option value="Yes, I will attend">
+                        <span class="lang-en">Yes, I will attend</span>
+                        <span class="lang-ml">അതെ, ഞാൻ പങ്കെടുക്കും</span>
+                        <span class="lang-ar">نعم، سأحضر</span>
+                    </option>
+                    <option value="Yes, with family">
+                        <span class="lang-en">Yes, with family</span>
+                        <span class="lang-ml">അതെ, കുടുംബത്തോടൊപ്പം</span>
+                        <span class="lang-ar">نعم، مع العائلة</span>
+                    </option>
+                    <option value="No, I cannot attend">
+                        <span class="lang-en">No, I cannot attend</span>
+                        <span class="lang-ml">ഇല്ല, എനിക്ക് പങ്കെടുക്കാൻ കഴിയില്ല</span>
+                        <span class="lang-ar">لا، لا أستطيع الحضور</span>
+                    </option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="guests">Number of Guests</label>
+                <label for="guests">
+                    <span class="lang-en">Number of Guests</span>
+                    <span class="lang-ml">അതിഥികളുടെ എണ്ണം</span>
+                    <span class="lang-ar">عدد الضيوف</span>
+                </label>
                 <input type="number" id="guests" name="entry.1045781291" placeholder="e.g. 2" min="0" max="20" />
             </div>
 
             <div class="form-group">
-                <label for="message">Message or Special Requests</label>
+                <label for="message">
+                    <span class="lang-en">Message or Special Requests</span>
+                    <span class="lang-ml">സന്ദേശം അല്ലെങ്കിൽ പ്രത്യേക ആവശ്യങ്ങൾ</span>
+                    <span class="lang-ar">رسالة أو طلبات خاصة</span>
+                </label>
                 <textarea id="message" name="entry.839337160" placeholder="Any dietary needs or special requests..."></textarea>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
-            <div class="rsvp-note">Your response will be recorded securely.</div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="lang-en">Submit RSVP</span>
+                <span class="lang-ml">ആർ.എസ്.വി.പി സമർപ്പിക്കുക</span>
+                <span class="lang-ar">إرسال الرد</span>
+            </button>
+            <div class="rsvp-note">
+                <span class="lang-en">Your response will be recorded securely.</span>
+                <span class="lang-ml">നിങ്ങളുടെ പ്രതികരണം സുരക്ഷിതമായി രേഖപ്പെടുത്തും.</span>
+                <span class="lang-ar">سيتم تسجيل ردك بشكل آمن.</span>
+            </div>
         </form>
 
         <iframe name="hiddenFrame" style="display:none;"></iframe>
@@ -1601,10 +1521,16 @@
     <!-- FOOTER -->
     <div class="footer">
         <div class="quran">
-            And We created you in pairs.
-            <small>&mdash; Quran 78:8</small>
+            <span class="lang-en">And We created you in pairs.</span>
+            <span class="lang-ml">നിങ്ങളെ ജോഡികളായി നാം സൃഷ്ടിച്ചു.</span>
+            <span class="lang-ar">وخلقناكم أزواجاً</span>
+            <small>— <span class="lang-en">Quran 78:8</span><span class="lang-ml">ഖുർആൻ 78:8</span><span class="lang-ar">القرآن 78:8</span></small>
         </div>
-        <div class="credit">We look forward to your presence and blessings</div>
+        <div class="credit">
+            <span class="lang-en">We look forward to your presence and blessings</span>
+            <span class="lang-ml">നിങ്ങളുടെ സാന്നിധ്യവും അനുഗ്രഹങ്ങളും ഞങ്ങൾ പ്രതീക്ഷിക്കുന്നു</span>
+            <span class="lang-ar">نتطلع إلى حضوركم وبركاتكم</span>
+        </div>
     </div>
 
 </div>
@@ -1614,28 +1540,70 @@ JAVASCRIPT
 ======================================== -->
 <script>
     // ============================================
-    // THEME TOGGLE
+    // SETTINGS PANEL TOGGLE
     // ============================================
-    (function() {
-        const toggle = document.getElementById('themeToggle');
+    const settingsToggle = document.getElementById('settingsToggle');
+    const settingsPanel = document.getElementById('settingsPanel');
+
+    settingsToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        settingsPanel.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!settingsPanel.contains(e.target) && e.target !== settingsToggle) {
+            settingsPanel.classList.remove('open');
+        }
+    });
+
+    // ============================================
+    // THEME
+    // ============================================
+    function setTheme(theme) {
         const html = document.documentElement;
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === theme);
+        });
+        settingsPanel.classList.remove('open');
+    }
 
-        html.setAttribute('data-theme', savedTheme);
-
-        toggle.addEventListener('click', function() {
-            const current = html.getAttribute('data-theme');
-            const next = current === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
+    // load saved theme
+    (function() {
+        const saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === saved);
         });
     })();
 
     // ============================================
-    // COUNTDOWN TIMER
+    // LANGUAGE
+    // ============================================
+    function setLang(lang) {
+        const container = document.getElementById('mainContent');
+        container.setAttribute('data-lang', lang);
+        localStorage.setItem('lang', lang);
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        settingsPanel.classList.remove('open');
+    }
+
+    (function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        document.getElementById('mainContent').setAttribute('data-lang', savedLang);
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === savedLang);
+        });
+    })();
+
+    // ============================================
+    // COUNTDOWN TIMER - target: Sept 5, 2026 00:00
     // ============================================
     (function() {
-        const targetDate = new Date('2026-09-04T00:00:00').getTime();
+        const targetDate = new Date('2026-09-05T00:00:00').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
@@ -1669,8 +1637,8 @@ JAVASCRIPT
     // ============================================
     function saveToCalendar(platform) {
         const title = 'Abdul Kalam Azad & Majidha Nasrin - Wedding';
-        const startDate = '20260904T000000';
-        const endDate = '20260905T000000';
+        const startDate = '20260905T000000';
+        const endDate = '20260906T000000';
         const location = 'Puthentheru Juma Masjid, Kerala, India';
         const description = 'Wedding of Abdul Kalam Azad Baqavi & Majidha Nasrin Hidaya. Nikkah on 4th September 2026, Reception on 5th September 2026 at 5:00 PM.';
 
@@ -1742,9 +1710,7 @@ END:VCALENDAR`;
         resize();
 
         class Particle {
-            constructor() {
-                this.reset();
-            }
+            constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * w;
                 this.y = Math.random() * h;
@@ -1759,7 +1725,6 @@ END:VCALENDAR`;
                 this.x += this.speedX;
                 this.y += this.speedY;
                 this.pulse += this.pulseSpeed;
-
                 if (this.x < -20 || this.x > w + 20 || this.y < -20 || this.y > h + 20) {
                     this.reset();
                 }
@@ -1770,7 +1735,6 @@ END:VCALENDAR`;
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(201, 168, 76, ${opacity})`;
                 ctx.fill();
-
                 if (this.size > 2) {
                     ctx.shadowColor = 'rgba(201, 168, 76, 0.05)';
                     ctx.shadowBlur = 10;
@@ -1786,10 +1750,7 @@ END:VCALENDAR`;
 
         function animateBg() {
             ctx.clearRect(0, 0, w, h);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateBg);
         }
         animateBg();
@@ -1800,7 +1761,6 @@ END:VCALENDAR`;
     // ============================================
     function switchMedia(type) {
         const slider = document.getElementById('toggleSlider');
-
         document.querySelectorAll('.media-toggle button').forEach((btn, index) => {
             btn.classList.toggle('active', btn.dataset.target === type);
             if (btn.dataset.target === type && index === 1) {
@@ -1846,7 +1806,7 @@ END:VCALENDAR`;
             form.submit();
 
             const originalText = btn.textContent;
-            btn.textContent = 'Submitted';
+            btn.textContent = '✓';
             btn.style.background = '#b8943c';
             btn.disabled = true;
 
