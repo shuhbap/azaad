@@ -14,6 +14,52 @@
 
     <style>
         /* ========================================
+                   CSS VARIABLES - LIGHT & DARK THEMES
+                ======================================== */
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e0cda0;
+            --gold-pale: #f0e8d8;
+            --gold-glow: rgba(201, 168, 76, 0.12);
+            --gold-glow-strong: rgba(201, 168, 76, 0.20);
+            --white: #ffffff;
+            --white-soft: #fcfaf7;
+            --text-dark: #1a1a1a;
+            --text-muted: #8a8078;
+            --shadow-gold: 0 8px 40px rgba(201, 168, 76, 0.10);
+            --border-gold: rgba(201, 168, 76, 0.12);
+            --bg-body: #ffffff;
+            --bg-container: rgba(255, 255, 255, 0.92);
+            --bg-card: #fcfaf7;
+            --text-primary: #1a1a1a;
+            --text-secondary: #8a8078;
+            --border-color: rgba(201, 168, 76, 0.12);
+            --shadow-color: 0 20px 80px rgba(0, 0, 0, 0.04);
+            --loader-bg: #ffffff;
+            --event-border: #c9a84c;
+            --event-text: #1a1a1a;
+            --toggle-bg: #fcfaf7;
+            --input-bg: #fcfaf7;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0d0d0d;
+            --bg-container: rgba(20, 20, 20, 0.95);
+            --bg-card: #1a1a1a;
+            --text-primary: #f0ece6;
+            --text-secondary: #a09888;
+            --border-color: rgba(201, 168, 76, 0.08);
+            --shadow-color: 0 20px 80px rgba(0, 0, 0, 0.3);
+            --loader-bg: #0d0d0d;
+            --event-border: #c9a84c;
+            --event-text: #f0ece6;
+            --toggle-bg: #1a1a1a;
+            --input-bg: #1a1a1a;
+            --gold-pale: rgba(201, 168, 76, 0.10);
+        }
+
+        /* ========================================
                    RESET & BASE
                 ======================================== */
         * {
@@ -22,27 +68,59 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --gold: #c9a84c;
-            --gold-light: #e0cda0;
-            --gold-pale: #f0e8d8;
-            --gold-glow: rgba(201, 168, 76, 0.12);
-            --white: #ffffff;
-            --white-soft: #fcfaf7;
-            --text-dark: #1a1a1a;
-            --text-muted: #8a8078;
-            --shadow-gold: 0 8px 40px rgba(201, 168, 76, 0.10);
-            --border-gold: rgba(201, 168, 76, 0.12);
-        }
-
         html,
         body {
             min-height: 100vh;
-            background: var(--white);
+            background: var(--bg-body);
             font-family: 'Inter', sans-serif;
             font-weight: 300;
-            color: var(--text-dark);
+            color: var(--text-primary);
             overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        /* ========================================
+                   THEME TOGGLE BUTTON - TOP RIGHT
+                ======================================== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-gold);
+            background: var(--bg-container);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--gold);
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* ========================================
@@ -52,7 +130,7 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: var(--white);
+            background: var(--loader-bg);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -142,7 +220,7 @@
         }
 
         .loader-text span {
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 300;
         }
 
@@ -256,13 +334,14 @@
             width: 100%;
             margin: 20px auto;
             padding: 32px 24px 36px;
-            background: rgba(255, 255, 255, 0.92);
+            background: var(--bg-container);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 32px;
-            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-gold);
+            box-shadow: var(--shadow-color);
+            border: 1px solid var(--border-color);
             animation: containerFade 1.2s ease-out;
+            transition: var(--transition);
         }
 
         @keyframes containerFade {
@@ -327,7 +406,7 @@
         }
 
         .header .monogram span {
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 200;
         }
 
@@ -356,7 +435,7 @@
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 8px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             animation: fadeIn 1s ease-out 1s both;
         }
 
@@ -386,6 +465,7 @@
             font-size: 34px;
             line-height: 1.2;
             letter-spacing: 0.5px;
+            color: var(--text-primary);
         }
 
         .couple-names .names .ampersand {
@@ -408,6 +488,50 @@
         }
 
         /* ========================================
+                   COUNTDOWN TIMER
+                ======================================== */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 16px 0 20px;
+            animation: fadeUp 0.8s ease-out 0.35s both;
+        }
+
+        .countdown-item {
+            text-align: center;
+            padding: 12px 6px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .countdown-item:hover {
+            border-color: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .countdown-item .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--gold);
+            display: block;
+            line-height: 1.1;
+        }
+
+        .countdown-item .label {
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        /* ========================================
                    PREMIUM PERSON CARDS
                 ======================================== */
         .persons {
@@ -418,12 +542,12 @@
         }
 
         .person-card {
-            background: var(--white-soft);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 22px 24px;
-            border: 1px solid var(--gold-pale);
+            border: 1px solid var(--border-color);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: var(--transition);
             animation: cardSlide 0.6s ease-out both;
             cursor: default;
         }
@@ -484,7 +608,7 @@
             font-family: 'Playfair Display', serif;
             font-weight: 500;
             font-size: 22px;
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin: 2px 0 4px;
             letter-spacing: 0.3px;
         }
@@ -493,7 +617,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
             font-size: 15px;
-            color: var(--text-dark);
+            color: var(--text-primary);
             line-height: 1.6;
         }
 
@@ -524,10 +648,10 @@
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 6px;
             padding-top: 8px;
-            border-top: 1px solid var(--gold-pale);
+            border-top: 1px solid var(--border-color);
             letter-spacing: 0.3px;
         }
 
@@ -543,12 +667,12 @@
 
         .event {
             background: transparent;
-            color: var(--text-dark);
+            color: var(--event-text);
             border-radius: 20px;
             padding: 20px 22px;
-            border: 1.5px solid var(--gold);
+            border: 1.5px solid var(--event-border);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: var(--transition);
             animation: eventFade 0.7s ease-out both;
             overflow: hidden;
         }
@@ -605,7 +729,7 @@
             font-weight: 500;
             font-size: 22px;
             margin: 2px 0 1px;
-            color: var(--text-dark);
+            color: var(--event-text);
             letter-spacing: 0.5px;
         }
 
@@ -613,16 +737,56 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
             font-size: 15px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .event .event-place {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 13px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 4px;
             letter-spacing: 0.3px;
+        }
+
+        /* ========================================
+                   SAVE TO CALENDAR BUTTON
+                ======================================== */
+        .calendar-actions {
+            display: flex;
+            gap: 10px;
+            margin: 8px 0 12px;
+            animation: fadeUp 0.8s ease-out 0.55s both;
+            flex-wrap: wrap;
+        }
+
+        .calendar-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 16px;
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            background: transparent;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .calendar-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .calendar-btn:active {
+            transform: scale(0.97);
         }
 
         /* ========================================
@@ -640,10 +804,10 @@
             border-radius: 16px;
             overflow: hidden;
             height: 180px;
-            border: 1.5px solid var(--gold-pale);
-            background: var(--white-soft);
+            border: 1.5px solid var(--border-color);
+            background: var(--bg-card);
             position: relative;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .map-box:hover {
@@ -665,7 +829,7 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-align: center;
             margin-top: 4px;
         }
@@ -683,10 +847,11 @@
             gap: 0;
             border-radius: 40px;
             overflow: hidden;
-            border: 1.5px solid var(--gold-pale);
-            background: var(--white-soft);
+            border: 1.5px solid var(--border-color);
+            background: var(--toggle-bg);
             margin-bottom: 14px;
             position: relative;
+            transition: var(--transition);
         }
 
         .media-toggle button {
@@ -697,9 +862,9 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 500;
             font-size: 14px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: var(--transition);
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
@@ -729,12 +894,13 @@
         .media-display {
             border-radius: 18px;
             overflow: hidden;
-            background: var(--white-soft);
-            border: 1px solid var(--gold-pale);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             width: 100%;
             aspect-ratio: 9 / 16;
             max-height: 480px;
             position: relative;
+            transition: var(--transition);
         }
 
         .media-display .media-content {
@@ -770,7 +936,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            background: var(--text-dark);
+            background: var(--text-primary);
         }
 
         /* ========================================
@@ -779,8 +945,9 @@
         .rsvp-section {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 2px solid var(--gold-pale);
+            border-top: 2px solid var(--border-color);
             animation: fadeUp 0.8s ease-out 1s both;
+            transition: var(--transition);
         }
 
         .rsvp-section .rsvp-title {
@@ -788,7 +955,7 @@
             font-weight: 400;
             font-size: 26px;
             text-align: center;
-            color: var(--text-dark);
+            color: var(--text-primary);
             letter-spacing: 1px;
         }
 
@@ -797,7 +964,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
             font-size: 14px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 2px;
             letter-spacing: 2px;
         }
@@ -819,7 +986,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 500;
             font-size: 13px;
-            color: var(--text-dark);
+            color: var(--text-primary);
             letter-spacing: 1px;
         }
 
@@ -829,14 +996,14 @@
             width: 100%;
             padding: 12px 16px;
             border-radius: 14px;
-            border: 1.5px solid var(--gold-pale);
-            background: var(--white-soft);
+            border: 1.5px solid var(--border-color);
+            background: var(--input-bg);
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 14px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             outline: none;
-            color: var(--text-dark);
+            color: var(--text-primary);
         }
 
         .rsvp-form input:focus,
@@ -868,7 +1035,7 @@
             font-weight: 600;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             margin-top: 4px;
             letter-spacing: 2px;
             position: relative;
@@ -909,7 +1076,7 @@
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 6px;
             letter-spacing: 0.3px;
         }
@@ -921,8 +1088,9 @@
             text-align: center;
             margin-top: 24px;
             padding-top: 18px;
-            border-top: 1px solid var(--gold-pale);
+            border-top: 1px solid var(--border-color);
             animation: fadeIn 1s ease-out 1.2s both;
+            transition: var(--transition);
         }
 
         .footer .quran {
@@ -936,7 +1104,7 @@
         .footer .quran small {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 12px;
             display: block;
             margin-top: 2px;
@@ -947,7 +1115,7 @@
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-top: 8px;
             letter-spacing: 0.5px;
         }
@@ -983,6 +1151,9 @@
             .map-box {
                 height: 220px;
             }
+            .countdown-item .number {
+                font-size: 34px;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1016,6 +1187,22 @@
             .map-box {
                 height: 130px;
             }
+            .countdown-item .number {
+                font-size: 22px;
+            }
+            .countdown-item .label {
+                font-size: 8px;
+            }
+            .theme-toggle {
+                top: 12px;
+                right: 12px;
+                width: 38px;
+                height: 38px;
+            }
+            .theme-toggle svg {
+                width: 18px;
+                height: 18px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -1038,20 +1225,11 @@
             .event .event-title {
                 font-size: 17px;
             }
-        }
-
-        /* ========================================
-                   SCROLL ANIMATIONS
-                ======================================== */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .calendar-btn {
+                font-size: 11px;
+                padding: 8px 12px;
+                min-width: 80px;
+            }
         }
 
         /* ========================================
@@ -1061,7 +1239,7 @@
             color: var(--gold);
         }
         .text-muted {
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -1071,6 +1249,23 @@
     <div class="orb"></div>
     <div class="orb"></div>
     <div class="orb"></div>
+
+    <!-- ========================================
+    THEME TOGGLE - TOP RIGHT
+    ======================================== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 3a6 6 0 0 0 9 9 6 6 0 1 1-9-9Z" />
+            <path d="M12 7v1" />
+            <path d="M12 16v1" />
+            <path d="M7 12h1" />
+            <path d="M16 12h1" />
+            <path d="M9.5 9.5l.7.7" />
+            <path d="M13.8 13.8l.7.7" />
+            <path d="M9.5 14.5l.7-.7" />
+            <path d="M13.8 10.2l.7-.7" />
+        </svg>
+    </button>
 
     <!-- ========================================
     PREMIUM LOADING SCREEN
@@ -1111,6 +1306,37 @@
                 <span class="ampersand">&</span>
                 <span class="bride-name">Majidha Nasrin</span>
             </div>
+        </div>
+
+        <!-- ========================================
+        COUNTDOWN TIMER
+        ======================================== -->
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+
+        <!-- ========================================
+        SAVE TO CALENDAR
+        ======================================== -->
+        <div class="calendar-actions">
+            <button class="calendar-btn" onclick="saveToCalendar('google')">Google</button>
+            <button class="calendar-btn" onclick="saveToCalendar('apple')">Apple</button>
+            <button class="calendar-btn" onclick="saveToCalendar('outlook')">Outlook</button>
         </div>
 
         <!-- PERSON CARDS -->
@@ -1258,6 +1484,107 @@ JAVASCRIPT
 ======================================== -->
 <script>
     // ============================================
+    // THEME TOGGLE
+    // ============================================
+    (function() {
+        const toggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme') || 'light';
+
+        html.setAttribute('data-theme', savedTheme);
+
+        toggle.addEventListener('click', function() {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    })();
+
+    // ============================================
+    // COUNTDOWN TIMER
+    // ============================================
+    (function() {
+        const targetDate = new Date('2026-09-04T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+
+    // ============================================
+    // SAVE TO CALENDAR
+    // ============================================
+    function saveToCalendar(platform) {
+        const title = 'Abdul Kalam Azad & Majidha Nasrin - Wedding';
+        const startDate = '20260904T000000';
+        const endDate = '20260905T000000';
+        const location = 'Puthentheru Juma Masjid, Kerala, India';
+        const description = 'Wedding of Abdul Kalam Azad Baqavi & Majidha Nasrin Hidaya. Nikkah on 4th September 2026, Reception on 5th September 2026 at 5:00 PM.';
+
+        let url = '';
+
+        switch (platform) {
+            case 'google':
+                url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+                break;
+            case 'apple':
+                // Apple Calendar uses .ics file download
+                const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding//EN
+BEGIN:VEVENT
+SUMMARY:${title}
+DTSTART:${startDate}
+DTEND:${endDate}
+LOCATION:${location}
+DESCRIPTION:${description}
+END:VEVENT
+END:VCALENDAR`;
+                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'wedding_invitation.ics';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+                return;
+            case 'outlook':
+                url = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${startDate}&enddt=${endDate}&subject=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+                break;
+            default:
+                return;
+        }
+
+        if (url) {
+            window.open(url, '_blank');
+        }
+    }
+
+    // ============================================
     // LOADING SCREEN
     // ============================================
     window.addEventListener('load', function() {
@@ -1399,22 +1726,6 @@ JAVASCRIPT
                 form.reset();
             }, 4000);
         });
-    })();
-
-    // ============================================
-    // SCROLL REVEAL
-    // ============================================
-    (function() {
-        const elements = document.querySelectorAll('.scroll-reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        elements.forEach(el => observer.observe(el));
     })();
 
     // ============================================
